@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Grammar Practice</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: linear-gradient(135deg, #eaf6ff, #f8f1ff);
+        color: #263238;
+        min-height: 100vh;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 25px 15px 50px;
+    }
+
+    .header {
+        background: white;
+        border-radius: 22px;
+        padding: 25px;
+        text-align: center;
+        box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+        margin-bottom: 20px;
+    }
+
+    .header h1 {
+        margin: 0 0 8px;
+        font-size: 32px;
+    }
+
+    .header p {
+        margin: 0;
+        color: #607d8b;
+        font-size: 16px;
+    }
+
+    .controls {
+        background: white;
+        border-radius: 18px;
+        padding: 18px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        flex-wrap: wrap;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    }
+
+    .level-box {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .level-box label {
+        font-weight: bold;
+    }
+
+    select {
+        font-size: 16px;
+        padding: 10px 35px 10px 12px;
+        border: 2px solid #b0bec5;
+        border-radius: 10px;
+        background: white;
+        cursor: pointer;
+    }
+
+    .progress {
+        font-weight: bold;
+        color: #546e7a;
+    }
+
+    .question-card {
+        background: white;
+        border-radius: 18px;
+        padding: 22px;
+        margin-bottom: 15px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    }
+
+    .question-number {
+        font-weight: bold;
+        color: #7e57c2;
+        margin-bottom: 10px;
+        font-size: 15px;
+    }
+
+    .sentence {
+        font-size: 20px;
+        line-height: 1.6;
+        margin-bottom: 15px;
+        font-weight: 500;
+    }
+
+    .answer-select {
+        width: 100%;
+        max-width: 400px;
+        padding: 12px;
+        font-size: 17px;
+        border: 2px solid #cfd8dc;
+        border-radius: 10px;
+        background: white;
+    }
+
+    .answer-select:focus {
+        outline: none;
+        border-color: #7e57c2;
+    }
+
+    .feedback {
+        margin-top: 10px;
+        padding: 10px 12px;
+        border-radius: 9px;
+        display: none;
+        font-size: 15px;
+        line-height: 1.5;
+    }
+
+    .correct {
+        background: #e8f5e9;
+        color: #2e7d32;
+        display: block;
+    }
+
+    .incorrect {
+        background: #ffebee;
+        color: #c62828;
+        display: block;
+    }
+
+    .button-area {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin: 25px 0;
+    }
+
+    button {
+        border: none;
+        border-radius: 12px;
+        padding: 13px 22px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.15s, opacity 0.15s;
+    }
+
+    button:hover {
+        transform: translateY(-2px);
+        opacity: 0.92;
+    }
+
+    .check-btn {
+        background: #7e57c2;
+        color: white;
+    }
+
+    .next-btn {
+        background: #43a047;
+        color: white;
+        display: none;
+    }
+
+    .restart-btn {
+        background: #546e7a;
+        color: white;
+    }
+
+    .results {
+        background: white;
+        border-radius: 20px;
+        padding: 25px;
+        text-align: center;
+        box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+        margin-top: 25px;
+    }
+
+    .results h2 {
+        margin-top: 0;
+    }
+
+    .set-results {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin: 20px 0;
+    }
+
+    .set-result {
+        padding: 15px 20px;
+        border-radius: 12px;
+        background: #f3e5f5;
+        min-width: 120px;
+    }
+
+    .set-result strong {
+        display: block;
+        font-size: 23px;
+        margin-top: 5px;
+    }
+
+    .overall-score {
+        font-size: 30px;
+        font-weight: bold;
+        color: #7e57c2;
+        margin: 15px 0;
+    }
+
+    .message {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .level-description {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #78909c;
+    }
+
+    @media (max-width: 600px) {
+        .header h1 {
+            font-size: 26px;
+        }
+
+        .sentence {
+            font-size: 18px;
+        }
+
+        .controls {
+            align-items: flex-start;
+        }
+
+        .level-box {
+            width: 100%;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        select {
+            width: 100%;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>📚 English Grammar Practice</h1>
+        <p>Choose the correct word to complete each sentence.</p>
+    </div>
+
+    <div class="controls">
+        <div class="level-box">
+            <label for="level">Level:</label>
+
+            <select id="level" onchange="changeLevel()">
+                <option value="beginner">🟢 Beginner</option>
+                <option value="medium">🟡 Medium</option>
+                <option value="hard">🔴 Hard</option>
+            </select>
+
+            <div class="level-description" id="levelDescription">
+                2–3 answer choices
+            </div>
+        </div>
+
+        <div class="progress" id="progress">
+            Set 1 of 3
+        </div>
+    </div>
+
+    <div id="questionContainer"></div>
+
+    <div class="button-area">
+        <button class="check-btn" id="checkButton" onclick="checkAnswers()">
+            ✓ Check Answers
+        </button>
+
+        <button class="next-btn" id="nextButton" onclick="nextSet()">
+            Next Set →
+        </button>
+
+        <button class="restart-btn" onclick="restartPractice()">
+            ↻ Start Again
+        </button>
+    </div>
+
+    <div class="results" id="results">
+        <h2>📊 Your Results</h2>
+
+        <div class="set-results" id="setResults">
+            <div class="set-result">
+                Set 1
+                <strong>—</strong>
+            </div>
+
+            <div class="set-result">
+                Set 2
+                <strong>—</strong>
+            </div>
+
+            <div class="set-result">
+                Set 3
+                <strong>—</strong>
+            </div>
+        </div>
+
+        <div class="overall-score" id="overallScore">
+            0 / 0
+        </div>
+
+        <div class="message" id="resultMessage">
+            Complete a set to see your results.
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   QUESTION BANK
+   =========================================================
+
+   Grammar focus:
+   - is / am / are
+   - was / were
+   - do / does
+   - has / have
+   - present tense verbs
+   - adding -s
+   - adding -es
+   - changing y to -ies
+
+   Beginner:
+   2–3 choices
+
+   Medium:
+   3–4 choices
+
+   Hard:
+   exactly 4 choices with mixed grammar distractors.
+========================================================= */
+
+
+const questionBank = {
+
+    beginner: [
+
+        {
+            sentence: "She ___ happy today.",
+            answer: "is",
+            choices: ["is", "are"],
+            explanation: "We use 'is' with he, she, and it."
+        },
+
+        {
+            sentence: "I ___ a student.",
+            answer: "am",
+            choices: ["am", "is", "are"],
+            explanation: "We use 'am' with I."
+        },
+
+        {
+            sentence: "They ___ my friends.",
+            answer: "are",
+            choices: ["is", "are"],
+            explanation: "We use 'are' with they."
+        },
+
+        {
+            sentence: "Tom ___ a red bag.",
+            answer: "has",
+            choices: ["has", "have"],
+            explanation: "We use 'has' with he, she, and it."
+        },
+
+        {
+            sentence: "We ___ two dogs.",
+            answer: "have",
+            choices: ["has", "have"],
+            explanation: "We use 'have' with we, you, and they."
+        },
+
+        {
+            sentence: "She ___ to school every day.",
+            answer: "walks",
+            choices: ["walk", "walks"],
+            explanation: "She is singular, so the present-tense verb needs -s."
+        },
+
+        {
+            sentence: "They ___ football after school.",
+            answer: "play",
+            choices: ["play", "plays"],
+            explanation: "They is plural, so we use the base verb 'play'."
+        },
+
+        {
+            sentence: "He ___ milk every morning.",
+            answer: "drinks",
+            choices: ["drink", "drinks"],
+            explanation: "He is singular, so 'drink' becomes 'drinks'."
+        },
+
+        {
+            sentence: "The dogs ___ very loud.",
+            answer: "are",
+            choices: ["is", "are"],
+            explanation: "Dogs is plural, so we use 'are'."
+        },
+
+        {
+            sentence: "I ___ tired yesterday.",
+            answer: "was",
+            choices: ["was", "were"],
+            explanation: "We use 'was' with I in the past."
+        },
+
+        {
+            sentence: "They ___ at home yesterday.",
+            answer: "were",
+            choices: ["was", "were"],
+            explanation: "We use 'were' with they in the past."
+        },
+
+        {
+            sentence: "She ___ two brothers.",
+            answer: "has",
+            choices: ["has", "have"],
+            explanation: "We use 'has' with she."
+        },
+
+        {
+            sentence: "We ___ lunch at school.",
+            answer: "have",
+            choices: ["has", "have", "had"],
+            explanation: "We use 'have' with we."
+        },
+
+        {
+            sentence: "He ___ his homework every night.",
+            answer: "does",
+            choices: ["do", "does"],
+            explanation: "We use 'does' with he."
+        },
+
+        {
+            sentence: "They ___ their homework every day.",
+            answer: "do",
+            choices: ["do", "does"],
+            explanation: "We use 'do' with they."
+        },
+
+        {
+            sentence: "The baby ___ a lot.",
+            answer: "cries",
+            choices: ["cry", "cries"],
+            explanation: "With a singular subject, 'cry' changes to 'cries'."
+        },
+
+        {
+            sentence: "She ___ her room every Saturday.",
+            answer: "cleans",
+            choices: ["clean", "cleans"],
+            explanation: "She is singular, so 'clean' becomes 'cleans'."
+        },
+
+        {
+            sentence: "The boys ___ outside.",
+            answer: "are",
+            choices: ["is", "are"],
+            explanation: "Boys is plural, so we use 'are'."
+        },
+
+        {
+            sentence: "My mother ___ dinner every evening.",
+            answer: "cooks",
+            choices: ["cook", "cooks"],
+            explanation: "Mother is singular, so the verb needs -s."
+        },
+
+        {
+            sentence: "You ___ very kind.",
+            answer: "are",
+            choices: ["is", "am", "are"],
+            explanation: "We use 'are' with you."
+        },
+
+        {
+            sentence: "He ___ a new bicycle.",
+            answer: "has",
+            choices: ["has", "have"],
+            explanation: "We use 'has' with he."
+        },
+
+        {
+            sentence: "The cats ___ hungry.",
+            answer: "are",
+            choices: ["is", "are"],
+            explanation: "Cats is plural, so we use 'are'."
+        },
+
+        {
+            sentence: "She ___ English every day.",
+            answer: "studies",
+            choices: ["study", "studies"],
+            explanation: "With she, 'study' changes to 'studies'."
+        },
+
+        {
+            sentence: "We ___ happy yesterday.",
+            answer: "were",
+            choices: ["was", "were"],
+            explanation: "We use 'were' with we in the past."
+        }
+
+    ],
+
+
+    medium: [
+
+        {
+            sentence: "My sister ___ to school every morning.",
+            answer: "walks",
+            choices: ["walk", "walks", "walking"],
+            explanation: "Sister is singular, so the present-tense verb needs -s."
+        },
+
+        {
+            sentence: "The students ___ ready for class.",
+            answer: "are",
+            choices: ["is", "are", "am"],
+            explanation: "Students is plural, so we use 'are'."
+        },
+
+        {
+            sentence: "James ___ his homework every evening.",
+            answer: "does",
+            choices: ["do", "does", "has", "have"],
+            explanation: "James is singular, so we use 'does'."
+        },
+
+        {
+            sentence: "The children ___ lunch at noon.",
+            answer: "have",
+            choices: ["has", "have", "does", "do"],
+            explanation: "Children is plural, so we use 'have'."
+        },
+
+        {
+            sentence: "She ___ a beautiful picture.",
+            answer: "has",
+            choices: ["has", "have", "is", "are"],
+            explanation: "She is singular, so we use 'has'."
+        },
+
+        {
+            sentence: "Tom ___ basketball after school.",
+            answer: "plays",
+            choices: ["play", "plays", "playing", "does"],
+            explanation: "Tom is singular, so 'play' becomes 'plays'."
+        },
+
+        {
+            sentence: "We ___ very tired yesterday.",
+            answer: "were",
+            choices: ["was", "were", "are"],
+            explanation: "We use 'were' with we in the past."
+        },
+
+        {
+            sentence: "I ___ at home yesterday.",
+            answer: "was",
+            choices: ["was", "were", "am", "are"],
+            explanation: "We use 'was' with I in the past."
+        },
+
+        {
+            sentence: "The dog ___ very fast.",
+            answer: "runs",
+            choices: ["run", "runs", "running"],
+            explanation: "Dog is singular, so the verb needs -s."
+        },
+
+        {
+            sentence: "My parents ___ two cars.",
+            answer: "have",
+            choices: ["has", "have", "are", "does"],
+            explanation: "Parents is plural, so we use 'have'."
+        },
+
+        {
+            sentence: "Anna ___ her room every Saturday.",
+            answer: "cleans",
+            choices: ["clean", "cleans", "does", "is"],
+            explanation: "Anna is singular, so 'clean' becomes 'cleans'."
+        },
+
+        {
+            sentence: "The boys ___ not like vegetables.",
+            answer: "do",
+            choices: ["do", "does", "are", "has"],
+            explanation: "Boys is plural, so we use 'do'."
+        },
+
+        {
+            sentence: "He ___ not like coffee.",
+            answer: "does",
+            choices: ["do", "does", "is", "have"],
+            explanation: "He is singular, so we use 'does'."
+        },
+
+        {
+            sentence: "My teacher ___ very kind.",
+            answer: "is",
+            choices: ["is", "are", "am", "has"],
+            explanation: "Teacher is singular, so we use 'is'."
+        },
+
+        {
+            sentence: "The girls ___ in the library.",
+            answer: "are",
+            choices: ["is", "are", "was", "has"],
+            explanation: "Girls is plural, so we use 'are'."
+        },
+
+        {
+            sentence: "Lucy ___ English every day.",
+            answer: "studies",
+            choices: ["study", "studies", "studys", "is"],
+            explanation: "With a singular subject, study changes to studies."
+        },
+
+        {
+            sentence: "He ___ his teeth twice a day.",
+            answer: "brushes",
+            choices: ["brush", "brushes", "brushing", "does"],
+            explanation: "He is singular, so brush becomes brushes."
+        },
+
+        {
+            sentence: "The baby ___ when she is hungry.",
+            answer: "cries",
+            choices: ["cry", "cries", "crying", "does"],
+            explanation: "With a singular subject, cry changes to cries."
+        },
+
+        {
+            sentence: "You ___ a very good student.",
+            answer: "are",
+            choices: ["is", "am", "are", "has"],
+            explanation: "We use 'are' with you."
+        },
+
+        {
+            sentence: "The boys ___ football every Friday.",
+            answer: "play",
+            choices: ["play", "plays", "does", "has"],
+            explanation: "Boys is plural, so we use the base verb 'play'."
+        },
+
+        {
+            sentence: "My father ___ a new phone.",
+            answer: "has",
+            choices: ["has", "have", "does", "are"],
+            explanation: "Father is singular, so we use 'has'."
+        },
+
+        {
+            sentence: "They ___ not have enough time.",
+            answer: "do",
+            choices: ["do", "does", "are", "has"],
+            explanation: "They is plural, so we use 'do'."
+        },
+
+        {
+            sentence: "Sarah ___ to music every night.",
+            answer: "listens",
+            choices: ["listen", "listens", "listening", "does"],
+            explanation: "Sarah is singular, so listen becomes listens."
+        },
+
+        {
+            sentence: "The children ___ happy yesterday.",
+            answer: "were",
+            choices: ["was", "were", "are", "is"],
+            explanation: "Children is plural, so we use 'were' in the past."
+        },
+
+        {
+            sentence: "Mark ___ his homework before dinner.",
+            answer: "does",
+            choices: ["do", "does", "has", "have"],
+            explanation: "Mark is singular, so we use 'does'."
+        },
+
+        {
+            sentence: "My friends ___ many books.",
+            answer: "have",
+            choices: ["has", "have", "does", "is"],
+            explanation: "Friends is plural, so we use 'have'."
+        }
+
+    ],
+
+
+    hard: [
+
+        {
+            sentence: "Neither the teacher nor the students ___ ready.",
+            answer: "are",
+            choices: ["is", "are", "has", "have"],
+            explanation: "The subject closest to the verb is 'students', which is plural, so use 'are'."
+        },
+
+        {
+            sentence: "Neither the students nor the teacher ___ ready.",
+            answer: "is",
+            choices: ["is", "are", "has", "have"],
+            explanation: "The subject closest to the verb is 'teacher', which is singular, so use 'is'."
+        },
+
+        {
+            sentence: "Each student ___ a pencil.",
+            answer: "has",
+            choices: ["has", "have", "does", "is"],
+            explanation: "'Each student' is singular, so we use 'has'."
+        },
+
+        {
+            sentence: "Every child ___ to follow the rules.",
+            answer: "has",
+            choices: ["has", "have", "is", "are"],
+            explanation: "'Every child' is singular, so we use 'has'."
+        },
+
+        {
+            sentence: "The group of students ___ in the classroom.",
+            answer: "is",
+            choices: ["is", "are", "has", "have"],
+            explanation: "The main subject is 'group', which is singular."
+        },
+
+        {
+            sentence: "One of the boys ___ very quickly.",
+            answer: "runs",
+            choices: ["run", "runs", "does", "have"],
+            explanation: "The subject is 'one', so the verb is singular: 'runs'."
+        },
+
+        {
+            sentence: "The books on the table ___ mine.",
+            answer: "are",
+            choices: ["is", "are", "has", "have"],
+            explanation: "The subject 'books' is plural, so use 'are'."
+        },
+
+        {
+            sentence: "The box of pencils ___ on the desk.",
+            answer: "is",
+            choices: ["is", "are", "have", "do"],
+            explanation: "The main subject is 'box', which is singular."
+        },
+
+        {
+            sentence: "James, along with his friends, ___ soccer.",
+            answer: "plays",
+            choices: ["play", "plays", "does", "have"],
+            explanation: "The main subject is James, which is singular."
+        },
+
+        {
+            sentence: "She does not ___ coffee.",
+            answer: "drink",
+            choices: ["drink", "drinks", "does", "has"],
+            explanation: "After 'does not', use the base verb: 'drink'."
+        },
+
+        {
+            sentence: "The students do not ___ their homework.",
+            answer: "finish",
+            choices: ["finish", "finishes", "does", "has"],
+            explanation: "After 'do not', use the base verb: 'finish'."
+        },
+
+        {
+            sentence: "There ___ three books on the table.",
+            answer: "are",
+            choices: ["is", "are", "has", "have"],
+            explanation: "'Three books' is plural, so use 'are'."
+        },
+
+        {
+            sentence: "There ___ a book on the table.",
+            answer: "is",
+            choices: ["is", "are", "has", "have"],
+            explanation: "'A book' is singular, so use 'is'."
+        },
+
+        {
+            sentence: "The boy who lives next door ___ basketball.",
+            answer: "plays",
+            choices: ["play", "plays", "does", "have"],
+            explanation: "The subject is 'boy', which is singular."
+        },
+
+        {
+            sentence: "The girls who live next door ___ basketball.",
+            answer: "play",
+            choices: ["play", "plays", "does", "has"],
+            explanation: "The subject is 'girls', which is plural."
+        },
+
+        {
+            sentence: "My brother ___ to school by bus every day.",
+            answer: "goes",
+            choices: ["go", "goes", "does", "have"],
+            explanation: "Brother is singular, so 'go' becomes 'goes'."
+        },
+
+        {
+            sentence: "My brothers ___ to school by bus every day.",
+            answer: "go",
+            choices: ["go", "goes", "does", "has"],
+            explanation: "Brothers is plural, so use the base verb 'go'."
+        },
+
+        {
+            sentence: "The baby ___ when she is hungry.",
+            answer: "cries",
+            choices: ["cry", "cries", "does", "have"],
+            explanation: "Baby is singular, so 'cry' changes to 'cries'."
+        },
+
+        {
+            sentence: "The babies ___ when they are hungry.",
+            answer: "cry",
+            choices: ["cry", "cries", "does", "has"],
+            explanation: "Babies is plural, so use the base verb 'cry'."
+        },
+
+        {
+            sentence: "My sister ___ not like spicy food.",
+            answer: "does",
+            choices: ["does", "do", "is", "have"],
+            explanation: "Sister is singular, so we use 'does'."
+        },
+
+        {
+            sentence: "My sisters ___ not like spicy food.",
+            answer: "do",
+            choices: ["do", "does", "are", "has"],
+            explanation: "Sisters is plural, so we use 'do'."
+        },
+
+        {
+            sentence: "Everyone in the class ___ a book.",
+            answer: "has",
+            choices: ["has", "have", "do", "are"],
+            explanation: "'Everyone' is grammatically singular, so use 'has'."
+        },
+
+        {
+            sentence: "Both of the boys ___ a bicycle.",
+            answer: "have",
+            choices: ["has", "have", "does", "is"],
+            explanation: "'Both' refers to two people, so use 'have'."
+        },
+
+        {
+            sentence: "The list of names ___ on the desk.",
+            answer: "is",
+            choices: ["is", "are", "have", "do"],
+            explanation: "The main subject is 'list', which is singular."
+        },
+
+        {
+            sentence: "The names on the list ___ correct.",
+            answer: "are",
+            choices: ["is", "are", "has", "does"],
+            explanation: "The subject 'names' is plural."
+        },
+
+        {
+            sentence: "He ___ his teeth every morning.",
+            answer: "brushes",
+            choices: ["brush", "brushes", "does", "has"],
+            explanation: "He is singular, so brush becomes brushes."
+        },
+
+        {
+            sentence: "They ___ their teeth every morning.",
+            answer: "brush",
+            choices: ["brush", "brushes", "does", "have"],
+            explanation: "They is plural, so use the base verb 'brush'."
+        },
+
+        {
+            sentence: "Sarah ___ English three times a week.",
+            answer: "studies",
+            choices: ["study", "studies", "does", "has"],
+            explanation: "With Sarah, 'study' changes to 'studies'."
+        },
+
+        {
+            sentence: "The students ___ English three times a week.",
+            answer: "study",
+            choices: ["study", "studies", "does", "has"],
+            explanation: "Students is plural, so use the base verb 'study'."
+        },
+
+        {
+            sentence: "I ___ very tired after the game yesterday.",
+            answer: "was",
+            choices: ["was", "were", "am", "have"],
+            explanation: "We use 'was' with I in the past."
+        },
+
+        {
+            sentence: "They ___ very tired after the game yesterday.",
+            answer: "were",
+            choices: ["was", "were", "are", "have"],
+            explanation: "We use 'were' with they in the past."
+        },
+
+        {
+            sentence: "The teacher ___ two computers.",
+            answer: "has",
+            choices: ["has", "have", "does", "are"],
+            explanation: "Teacher is singular, so use 'has'."
+        },
+
+        {
+            sentence: "The teachers ___ two computers.",
+            answer: "have",
+            choices: ["has", "have", "does", "is"],
+            explanation: "Teachers is plural, so use 'have'."
+        },
+
+        {
+            sentence: "My father ___ not watch TV in the morning.",
+            answer: "does",
+            choices: ["does", "do", "is", "has"],
+            explanation: "Father is singular, so use 'does'."
+        },
+
+        {
+            sentence: "My parents ___ not watch TV in the morning.",
+            answer: "do",
+            choices: ["do", "does", "are", "has"],
+            explanation: "Parents is plural, so use 'do'."
+        },
+
+        {
+            sentence: "The dog ___ loudly when someone comes.",
+            answer: "barks",
+            choices: ["bark", "barks", "does", "have"],
+            explanation: "Dog is singular, so bark becomes barks."
+        },
+
+        {
+            sentence: "The dogs ___ loudly when someone comes.",
+            answer: "bark",
+            choices: ["bark", "barks", "does", "has"],
+            explanation: "Dogs is plural, so use the base verb 'bark'."
+        }
+
+    ]
+};
+
+
+/* =========================================================
+   APP VARIABLES
+========================================================= */
+
+let currentLevel = "beginner";
+let currentSet = 1;
+let currentQuestions = [];
+let setScores = [];
+let totalScore = 0;
+let totalQuestionsAnswered = 0;
+let answersChecked = false;
+
+
+/* =========================================================
+   LEVEL DESCRIPTION
+========================================================= */
+
+function updateLevelDescription() {
+
+    const description = document.getElementById("levelDescription");
+
+    if (currentLevel === "beginner") {
+        description.textContent = "2–3 answer choices";
+    }
+
+    else if (currentLevel === "medium") {
+        description.textContent = "3–4 answer choices";
+    }
+
+    else {
+        description.textContent = "4 mixed answer choices";
+    }
+}
+
+
+/* =========================================================
+   SHUFFLE
+========================================================= */
+
+function shuffle(array) {
+
+    const newArray = [...array];
+
+    for (let i = newArray.length - 1; i > 0; i--) {
+
+        const j = Math.floor(Math.random() * (i + 1));
+
+        [newArray[i], newArray[j]] =
+        [newArray[j], newArray[i]];
+    }
+
+    return newArray;
+}
+
+
+/* =========================================================
+   START A SET
+========================================================= */
+
+function startSet() {
+
+    answersChecked = false;
+
+    const bank = questionBank[currentLevel];
+
+    currentQuestions = shuffle(bank).slice(0, 10);
+
+    document.getElementById("progress").textContent =
+        "Set " + currentSet + " of 3";
+
+    document.getElementById("checkButton").style.display =
+        "inline-block";
+
+    document.getElementById("nextButton").style.display =
+        "none";
+
+    renderQuestions();
+
+    updateResults();
+}
+
+
+/* =========================================================
+   RENDER QUESTIONS
+========================================================= */
+
+function renderQuestions() {
+
+    const container =
+        document.getElementById("questionContainer");
+
+    container.innerHTML = "";
+
+    currentQuestions.forEach((question, index) => {
+
+        const card = document.createElement("div");
+
+        card.className = "question-card";
+
+        const number = document.createElement("div");
+
+        number.className = "question-number";
+
+        number.textContent =
+            "Question " + (index + 1);
+
+        const sentence = document.createElement("div");
+
+        sentence.className = "sentence";
+
+        sentence.textContent =
+            question.sentence;
+
+        const select = document.createElement("select");
+
+        select.className = "answer-select";
+
+        select.id = "answer-" + index;
+
+        const defaultOption =
+            document.createElement("option");
+
+        defaultOption.value = "";
+
+        defaultOption.textContent =
+            "Choose an answer...";
+
+        select.appendChild(defaultOption);
+
+        /*
+           Shuffle the choices so the correct answer
+           is not always in the same position.
+        */
+
+        const choices =
+            shuffle(question.choices);
+
+        choices.forEach(choice => {
+
+            const option =
+                document.createElement("option");
+
+            option.value = choice;
+
+            option.textContent = choice;
+
+            select.appendChild(option);
+        });
+
+        const feedback =
+            document.createElement("div");
+
+        feedback.className = "feedback";
+
+        feedback.id = "feedback-" + index;
+
+        card.appendChild(number);
+
+        card.appendChild(sentence);
+
+        card.appendChild(select);
+
+        card.appendChild(feedback);
+
+        container.appendChild(card);
+    });
+}
+
+
+/* =========================================================
+   CHECK ANSWERS
+========================================================= */
+
+function checkAnswers() {
+
+    if (answersChecked) {
+        return;
+    }
+
+    let score = 0;
+
+    currentQuestions.forEach((question, index) => {
+
+        const select =
+            document.getElementById("answer-" + index);
+
+        const feedback =
+            document.getElementById("feedback-" + index);
+
+        const selected =
+            select.value;
+
+        if (selected === question.answer) {
+
+            score++;
+
+            feedback.className =
+                "feedback correct";
+
+            feedback.innerHTML =
+                "✓ Correct! " +
+                question.explanation;
+        }
+
+        else {
+
+            feedback.className =
+                "feedback incorrect";
+
+            if (selected === "") {
+
+                feedback.innerHTML =
+                    "⚠️ Please choose an answer. " +
+                    "The correct answer is <strong>" +
+                    question.answer +
+                    "</strong>.";
+            }
+
+            else {
+
+                feedback.innerHTML =
+                    "✗ Not quite. The correct answer is " +
+                    "<strong>" +
+                    question.answer +
+                    "</strong>. " +
+                    question.explanation;
+            }
+        }
+
+        select.disabled = true;
+    });
+
+
+    setScores[currentSet - 1] = score;
+
+    totalScore = setScores.reduce(
+        (sum, value) => sum + (value || 0),
+        0
+    );
+
+    totalQuestionsAnswered =
+        setScores.filter(
+            score => score !== undefined
+        ).length * 10;
+
+    answersChecked = true;
+
+    document.getElementById("checkButton").style.display =
+        "none";
+
+
+    if (currentSet < 3) {
+
+        document.getElementById("nextButton").style.display =
+            "inline-block";
+    }
+
+    else {
+
+        document.getElementById("nextButton").style.display =
+            "none";
+    }
+
+    updateResults();
+}
+
+
+/* =========================================================
+   NEXT SET
+========================================================= */
+
+function nextSet() {
+
+    if (!answersChecked) {
+        return;
+    }
+
+    if (currentSet >= 3) {
+        return;
+    }
+
+    currentSet++;
+
+    startSet();
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+/* =========================================================
+   RESULTS
+========================================================= */
+
+function updateResults() {
+
+    const resultContainer =
+        document.getElementById("setResults");
+
+    resultContainer.innerHTML = "";
+
+    for (let i = 0; i < 3; i++) {
+
+        const box =
+            document.createElement("div");
+
+        box.className = "set-result";
+
+        const score =
+            setScores[i];
+
+        if (score === undefined) {
+
+            box.innerHTML =
+                "Set " +
+                (i + 1) +
+                "<strong>—</strong>";
+        }
+
+        else {
+
+            const percentage =
+                Math.round((score / 10) * 100);
+
+            box.innerHTML =
+                "Set " +
+                (i + 1) +
+                "<strong>" +
+                score +
+                "/10</strong>" +
+                "<small>" +
+                percentage +
+                "%</small>";
+        }
+
+        resultContainer.appendChild(box);
+    }
+
+
+    const completedSets =
+        setScores.filter(
+            score => score !== undefined
+        ).length;
+
+
+    if (completedSets === 0) {
+
+        document.getElementById("overallScore")
+            .textContent = "0 / 0";
+
+        document.getElementById("resultMessage")
+            .textContent =
+            "Complete a set to see your results.";
+
+        return;
+    }
+
+
+    const questionsCompleted =
+        completedSets * 10;
+
+    const percentage =
+        Math.round(
+            (totalScore / questionsCompleted) * 100
+        );
+
+
+    document.getElementById("overallScore")
+        .textContent =
+        totalScore +
+        " / " +
+        questionsCompleted +
+        " (" +
+        percentage +
+        "%)";
+
+
+    let message = "";
+
+    if (percentage === 100) {
+
+        message =
+            "🌟 Excellent! Perfect score!";
+    }
+
+    else if (percentage >= 90) {
+
+        message =
+            "🎉 Excellent work! Keep it up!";
+    }
+
+    else if (percentage >= 80) {
+
+        message =
+            "👏 Great job! You are doing very well!";
+    }
+
+    else if (percentage >= 70) {
+
+        message =
+            "👍 Good work! Keep practicing!";
+    }
+
+    else if (percentage >= 60) {
+
+        message =
+            "💪 You are improving. Keep practicing!";
+    }
+
+    else {
+
+        message =
+            "🌱 Keep practicing. You can do it!";
+    }
+
+
+    document.getElementById("resultMessage")
+        .textContent = message;
+}
+
+
+/* =========================================================
+   CHANGE LEVEL
+========================================================= */
+
+function changeLevel() {
+
+    currentLevel =
+        document.getElementById("level").value;
+
+    currentSet = 1;
+
+    setScores = [];
+
+    totalScore = 0;
+
+    totalQuestionsAnswered = 0;
+
+    updateLevelDescription();
+
+    startSet();
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+/* =========================================================
+   RESTART
+========================================================= */
+
+function restartPractice() {
+
+    currentSet = 1;
+
+    setScores = [];
+
+    totalScore = 0;
+
+    totalQuestionsAnswered = 0;
+
+    answersChecked = false;
+
+    updateLevelDescription();
+
+    startSet();
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+/* =========================================================
+   START APP
+========================================================= */
+
+updateLevelDescription();
+
+startSet();
+
+</script>
+
+</body>
+</html>
